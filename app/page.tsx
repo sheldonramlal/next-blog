@@ -49,7 +49,7 @@ export default async function Home() {
 
       {/* Latest articles section */}
       <section className="max-w-7xl mx-auto px-4 mt-20 mb-10">
-        <div className="border-b border-gray-600 my-5"></div>
+        <div className="border-b border-gray-200 my-5"></div>
         <h2 className="text-3xl lg:text-4xl tracking-tight font-medium">Latest articles</h2>
        
         {/* Cards grid */}
