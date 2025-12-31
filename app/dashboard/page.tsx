@@ -41,12 +41,13 @@ export default async function DashboardPage() {
      
      <h2 className="text-2xl font-medium mt-10">All My Blogs</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-5">
-        {posts ? ( posts.map((post) => (
+        {posts && ( posts.map((post) => (
           <BlogCard title={post.title} slug={post.slug} key={post.slug} name={post.author.name} imageUrl={post.imageUrl} />
-        )) ) : (
-          <p>You have no blogs yet.</p>
-        )}
+        )) ) 
+        }
       </div>
+      {posts.length === 0 && <p className="text-gray-600 text-sm">You haven't written a blog yet. <span className="text-blue-500"><a href="/blogs/write-a-blog/">Write one now</a></span></p>}
+
       
 
       {/* <LogoutButton /> */}

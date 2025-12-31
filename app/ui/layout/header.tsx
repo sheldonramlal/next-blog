@@ -40,13 +40,7 @@ export default function Header() {
                                     Blogs
                                 </Link>
                             </li>
-                            <li>
-                                <Link 
-                                    href="/"
-                                    className="">
-                                    About
-                                </Link>
-                            </li>
+                           
                             {session && (
                             <li>
                                 <Link 
@@ -89,7 +83,6 @@ export default function Header() {
                     <nav className="flex flex-col gap-8 text-lg font-bold py-8 ">
                         <Link href="/" onClick={() => setOpen(false)}>Home</Link>
                         <Link href="/blogs" onClick={() => setOpen(false)}>Blogs</Link>
-                        <Link href="/contact" onClick={() => setOpen(false)}>About</Link>
                         {session && <Link href="/blogs/write-a-blog" onClick={() => setOpen(false)}>Write A Blog</Link>}
                     </nav>
                     

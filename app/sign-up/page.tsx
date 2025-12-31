@@ -96,6 +96,9 @@ export default function SignUpPage() {
         >
           Sign up
         </button>
+
+                <p className="text-gray-600 text-sm text-center">Already have an account? <span  className="text-blue-500"><a href="/sign-in">Sign in</a></span>.</p>
+
       </form>
     </main>
     
