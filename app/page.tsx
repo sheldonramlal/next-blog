@@ -28,7 +28,7 @@ export default async function Home() {
       <section className="w-full mx-auto max-w-7xl px-4 mt-16 lg:mt-24 ">
         <div className="flex flex-col items-center justify-center text-center  ">
 
-          <h1 className="text-4xl lg:text-6xl tracking-tight font-medium wrap-normal ">Stories Worth Sharing</h1>
+          <h1 className="text-4xl lg:text-6xl tracking-tight text-black font-medium wrap-normal ">Stories Worth Sharing</h1>
           <p className="mt-4 lg:mt-6 text-center font-medium text-black opacity-80 ">Read blogs from a growing community of writers.<br></br> Discover new perspectives or create an account and publish your own.
           </p>
 
