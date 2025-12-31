@@ -6,12 +6,28 @@ import LogoutButton from "../components/LogoutButton";
 import { getSession } from "@/src/lib/auth";
 
 export default async function DashboardPage() {
+  type Post = {
+    id: string;
+    title: string;
+    content: string;
+    slug: string;
+    published: boolean;
+    authorId: string;
+    imageUrl: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+
+  type PostWithAuthor = Post & { author: { id: string; name: string;} };
+
+
   const session = await getSession();
   
   if (!session?.user) {
     redirect ("/sign-in");
   }
-  const posts = await getPostsByUser(session.user.id);
+
+  const posts: PostWithAuthor[] = await getPostsByUser(session.user.id);
 
   const { user } = session;
 

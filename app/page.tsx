@@ -6,7 +6,21 @@ import { getPosts } from "@/src/lib/posts";
 
 
 export default async function Home() {
-  const posts = await getPosts();
+ type Post = {
+    id: string;
+    title: string;
+    content: string;
+    slug: string;
+    published: boolean;
+    authorId: string;
+    imageUrl: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+    type PostWithAuthor = Post & { author: { id: string; name: string; email: string } };
+    const posts: PostWithAuthor[] = await getPosts();
+
 
   return (
     <main className="w-full ">
