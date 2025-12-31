@@ -1,6 +1,6 @@
 import { redirect, notFound } from "next/navigation";
 import { getSession } from "@/src/lib/auth";
-import prisma from "@/src/lib/prisma";
+import {prisma} from "@/src/lib/prisma";
 import EditPostForm from "@/app/components/EditPostForm";
 
 type Props = {

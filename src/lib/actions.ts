@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { getSession } from "@/src/lib/auth";
-import prisma from "@/src/lib/prisma";
+import {prisma} from "@/src/lib/prisma";
 import { slugify } from "./slugify";
 import path from "path";
 import fs from "fs/promises";
