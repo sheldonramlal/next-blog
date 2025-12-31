@@ -6,12 +6,7 @@ export async function getPosts() {
       published: true,
     },
     include: {
-      author: {
-        select: {
-          id: true,
-          name: true,
-        },
-      },
+      author: true, // ✅ include the author relation
     },
     orderBy: { createdAt: "desc" },
   });

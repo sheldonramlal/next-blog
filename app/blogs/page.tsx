@@ -1,9 +1,12 @@
 // import { posts } from "../data/posts";
 import BlogCard from "../components/BlogCards"
 import { getPosts } from "@/src/lib/posts";
+import type { Post } from '@prisma/client';
 
 export default async function BlogPage() {
-    const posts = await getPosts();
+
+    type PostWithAuthor = Post & { author: { id: string; name: string; email: string } };
+    const posts: PostWithAuthor[] = await getPosts();
 
     return (
         <main className="w-full ">
