@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
+
 import BlogCard from "./components/BlogCards";
 import { getPosts } from "@/src/lib/posts";
 
