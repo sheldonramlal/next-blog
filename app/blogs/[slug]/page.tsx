@@ -23,8 +23,15 @@ export default async function BlogPostPage({
             <div>
                 <h1 className="text-4xl lg:text-5xl tracking-tight font-medium wrap-normal">{post.title}</h1>
                 <p className="mt-5 text-gray-600">By {post.author.name}</p>
-                <p className="text-gray-600">
-                  {post.createdAt.toLocaleDateString("en-US", {
+                <p className="text-gray-600">Created on: {" "} 
+                   {post.createdAt.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+                <p className="text-gray-600">Updated on: {" "}
+                  {post.updatedAt.toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
