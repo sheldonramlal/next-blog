@@ -80,7 +80,7 @@ export async function updatePost(formData: FormData) {
     imageUrl = `/uploads/${fileName}`;
   }
 
-  await prisma.post.update({
+  const updatedPost = await prisma.post.update({
     where: { id: postId },
     data: {
       title,
@@ -90,7 +90,7 @@ export async function updatePost(formData: FormData) {
     },
   });
 
-  redirect(`/blogs/${post.slug}`);
+  redirect(`/blogs/${updatedPost.slug}`);
 }
 
 export async function deletePost(postId: string){
