@@ -22,12 +22,19 @@ export default async function BlogPostPage({
         <section className="max-w-3xl mx-auto px-4 mt-16  ">
             <div>
                 <h1 className="text-4xl lg:text-5xl tracking-tight font-medium wrap-normal">{post.title}</h1>
-                <p className="mt-5 text-gray-600">Written by {post.author.name}</p>
+                <p className="mt-5 text-gray-600">By {post.author.name}</p>
+                <p className="text-gray-600">
+                  {post.createdAt.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
                 <div className="flex gap-5 mt-5">
                   {isAuthor && (
                     <Link 
                           href={`/blogs/${post.slug}/edit`} 
-                          className="inline-block text-sm px-3 py-1 rounded bg-black text-white"
+                          className="inline-block text-sm px-3 py-2 rounded bg-black text-white font-medium"
                     >
                       Edit Post
                     </Link>
@@ -37,7 +44,9 @@ export default async function BlogPostPage({
                     <DeletePostBtn postId={post.id} />
                   )}
                 </div>
-                <p className="mt-16">{post.content}</p>
+                <div className="border-b border-gray-200 mt-5"></div>
+
+                <p className="mt-5">{post.content}</p>
             </div>
         </section>
     </main>
