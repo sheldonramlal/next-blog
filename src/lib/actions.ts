@@ -100,9 +100,9 @@ export async function updatePost(formData: FormData) {
     },
   });
 
-  redirect(`/blogs/${updatedPost.slug}`);
   revalidatePath("/blogs");
   revalidatePath("/");
+  redirect(`/blogs/${updatedPost.slug}`);
 }
 
 export async function deletePost(postId: string){
