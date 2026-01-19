@@ -7,6 +7,7 @@ import {prisma} from "@/src/lib/prisma";
 import { slugify } from "./slugify";
 import path from "path";
 import fs from "fs/promises";
+import { revalidatePath } from "next/cache";
 
 export async function createPost(formData: FormData) {
   const session = await getSession();
@@ -38,17 +39,20 @@ export async function createPost(formData: FormData) {
     throw new Error("Missing fields");
   }
 
+  const slug = await slugify(title);
+
   await prisma.post.create({
     data: {
       title,
-      slug: slugify(title),
+      slug: slug,
       imageUrl,
       content,
       authorId: session.user.id,
       published: true,
     },
   });
-
+  revalidatePath("/blogs");
+  revalidatePath("/");
   redirect("/blogs");
 }
 
@@ -80,13 +84,19 @@ export async function updatePost(formData: FormData) {
     imageUrl = `/uploads/${fileName}`;
   }
 
+  let slug = post.slug;
+
+  if (title !== post.title) {
+    slug = await slugify(title, postId);
+  }
+
   const updatedPost = await prisma.post.update({
     where: { id: postId },
     data: {
       title,
       content,
       imageUrl,
-      slug: title.toLowerCase().replace(/\s+/g, "-"),
+      slug,
     },
   });
 
