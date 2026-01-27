@@ -2,8 +2,10 @@
 
 import { createPost } from "@/src/lib/actions";
 import { useState } from "react";
+import {ImageUploader} from "./ImageUploader";
 
 export default function NewPostForm() {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   return (
@@ -60,17 +62,13 @@ export default function NewPostForm() {
                       className="relative cursor-pointer rounded-md bg-transparent font-semibold text-indigo-600 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-indigo-600 hover:text-indigo-500"
                     >
                       <span>Upload a file</span>
-                      <input id="file-upload" name="image" type="file" accept="image/*" className="sr-only" 
-                       onChange={(e) => {
-                          const file = e.target.files?.[0] || null;
-                          setSelectedFile(file);
-                        }}/>
-                        
-                        {selectedFile && (
-                        <p className="text-sm text-gray-600">
-                          Selected image: <strong>{selectedFile.name}</strong>
-                        </p>
-                      )}
+                      <ImageUploader onUpload={setImageUrl} />
+                      <input type="hidden" name="imageUrl" value={imageUrl ?? ""} />
+                       {imageUrl && (
+                          <p className="text-sm text-gray-600 mt-2">
+                            Image uploaded ✓
+                          </p>
+                        )}
                     </label>
                     
                   </div>

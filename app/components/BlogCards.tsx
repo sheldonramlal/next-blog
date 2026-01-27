@@ -22,7 +22,7 @@ export default function BlogCard({ title, slug, name, imageUrl }: BlogCardProps)
                     {/* image */}
                     
                         {imageUrl && (
-                        <Image
+                        <img
                         src={imageUrl}
                         alt={title}
                         

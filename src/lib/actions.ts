@@ -18,22 +18,8 @@ export async function createPost(formData: FormData) {
 
   const title = formData.get("title")?.toString();
   const content = formData.get("content")?.toString();
-  const image = formData.get("image") as File | null;
+  const imageUrl = formData.get("imageUrl")?.toString() || null;
 
-   let imageUrl: string | null = null;
-
-  if (image && image.size > 0) {
-    const bytes = await image.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    const fileName = `${Date.now()}-${image.name.replace(/\s/g, "")}`;
-    const uploadDir = path.join(process.cwd(), "public/uploads");
-
-    await fs.mkdir(uploadDir, { recursive: true });
-    await fs.writeFile(`${uploadDir}/${fileName}`, buffer);
-
-    imageUrl = `/uploads/${fileName}`;
-  }
 
   if (!title || !content) {
     throw new Error("Missing fields");
@@ -63,26 +49,16 @@ export async function updatePost(formData: FormData) {
   const postId = formData.get("postId") as string;
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
-  const image = formData.get("image") as File | null;
+  const imageUrl = formData.get("imageUrl") as string | null;
 
   const post = await prisma.post.findUnique({ where: { id: postId } });
+
   if (!post || post.authorId !== session.user.id) {
     throw new Error("Unauthorized");
   }
 
-  let imageUrl = post.imageUrl;
+  
 
-  if (image && image.size > 0) {
-    const bytes = await image.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const fileName = `${Date.now()}-${image.name.replace(/\s/g, "")}`;
-    const uploadDir = path.join(process.cwd(), "public/uploads");
-
-    await fs.mkdir(uploadDir, { recursive: true });
-    await fs.writeFile(`${uploadDir}/${fileName}`, buffer);
-
-    imageUrl = `/uploads/${fileName}`;
-  }
 
   let slug = post.slug;
 
@@ -95,7 +71,7 @@ export async function updatePost(formData: FormData) {
     data: {
       title,
       content,
-      imageUrl,
+      imageUrl: imageUrl || post.imageUrl,
       slug,
     },
   });
@@ -115,6 +91,8 @@ export async function deletePost(postId: string){
       id: postId 
     },
   })
+  revalidatePath("/blogs");
+  revalidatePath("/");
   redirect("/blogs")
 
 }
