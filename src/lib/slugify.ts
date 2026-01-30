@@ -1,4 +1,4 @@
-import { prisma } from "@/src/lib/prisma"; // adjust import if needed
+import { prisma } from "@/src/lib/prisma"; 
 
 export async function slugify(
   title: string,

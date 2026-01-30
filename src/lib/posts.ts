@@ -6,7 +6,7 @@ export async function getPosts() {
       published: true,
     },
     include: {
-      author: true, // ✅ include the author relation
+      author: true, 
     },
     orderBy: { createdAt: "desc" },
   });

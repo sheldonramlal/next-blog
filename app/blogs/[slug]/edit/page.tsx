@@ -20,7 +20,7 @@ export default async function EditPostPage({ params }: Props) {
 
   if (!post) notFound();
 
-  // 🔐 Authorization check
+  //  Authorization check
   if (post.authorId !== session.user.id) {
     redirect("/blogs");
   }
